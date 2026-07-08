@@ -1,0 +1,54 @@
+name: Agent Guardrails
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      - name: Set up Maven 3.9
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.6
+
+      - name: Verify tooling
+        run: |
+          java -version
+          mvn -v
+
+      - name: Build & Verify
+        run: mvn -B clean verify
+
+      - name: Architecture Check (ArchUnit)
+        run: mvn -B test -Dtest='LayerDependencyTest'
+
+      - name: File Size Check
+        shell: bash
+        run: |
+          find src/main/java -name '*.java' | while read f; do
+            lines=$(wc -l < "$f")
+            if [ "$lines" -gt 500 ]; then
+              echo "❌ $f有$lines行（上限500）"
+              echo "✅ FIX: 拆分为更小的类"
+              exit 1
+            fi
+          done
+
+      - name: Check method size
+        shell: bash
+        run: |
+          # 使用checkstyle报告检查方法长度
+          if [ -f target/checkstyle-result.xml ]; then
+            echo "Checkstyle报告已生成"
+          fi

@@ -1,0 +1,82 @@
+# API规范
+
+## 统一响应结构
+```json
+{
+  "code": 200,
+  "message": "success",
+  "data": {}
+}
+```
+
+## 错误码规范
+| 错误码 | 描述 |
+|-------|------|
+| 200 | 成功 |
+| 400 | 参数错误 |
+| 401 | 未授权 |
+| 403 | 禁止访问 |
+| 500 | 服务器错误 |
+
+## API端点
+
+### 1. 食品分析
+#### POST /api/food/analyze
+请求：
+```json
+{
+  "imageBase64": "base64编码的图片",
+  "purpose": "给婴儿食用",
+  "ageGroup": "infant"
+}
+```
+响应：
+```json
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "foodName": "某品牌奶粉",
+    "ingredients": ["生牛乳", "乳糖", ...],
+    "analysisResult": {
+      "riskLevel": "LOW|MEDIUM|HIGH",
+      "concerns": ["建议选择 添加了DHA的产品", ...],
+      "recommendation": "可以购买，但建议关注..."
+    }
+  }
+}
+```
+
+### 2. 历史记录
+#### GET /api/history/list
+响应：
+```json
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "records": [
+      {
+        "id": "xxx",
+        "foodName": "某品牌奶粉",
+        "scanTime": "2026-07-08 10:00:00",
+        "result": "可以购买"
+      }
+    ],
+    "total": 100,
+    "page": 1,
+    "pageSize": 20
+  }
+}
+```
+
+### 3. 大模型配置
+#### GET /api/config/llm
+#### PUT /api/config/llm
+```json
+{
+  "provider": "qianwen|ERNIE|glm",
+  "apiKey": "sk-xxx",
+  "model": "qwen-turbo"
+}
+```

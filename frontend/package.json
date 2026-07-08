@@ -1,0 +1,1 @@
+{"name": "safe-food-assistant-frontend", "version": "1.0.0", "description": "食品安全AI助手H5移动端", "scripts": {"dev": "uni", "build": "uni build"}, "dependencies": {"pinia": "2.1.7", "uview-plus": "3.2.12", "vue": "3.4.21"}, "devDependencies": {"typescript": "5.4.5", "vite": "5.2.8", "vue-tsc": "2.0.11"}}
