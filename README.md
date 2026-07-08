@@ -2,6 +2,10 @@
 
 > 基于Harness Engineering实践构建的AI辅助移动端应用
 
+## 仓库信息
+- **GitHub**: https://github.com/htvv0308/safe_food_test
+- **分支策略**: Git Flow（main/develop/feature/hotfix）
+
 ## 项目概述
 
 帮助消费者通过OCR扫描食品包装，AI分析配料、营养、添加剂并给出购买建议。
@@ -72,6 +76,7 @@ safe_food_test/
 - [AGENTS.md](./AGENTS.md) - Agent导航
 - [docs/architecture/boundaries.md](./docs/architecture/boundaries.md) - 依赖规则
 - [docs/conventions/README.md](./docs/conventions/README.md) - 编码规范
+- [docs/conventions/git-workflow.md](./docs/conventions/git-workflow.md) - Git版本管理
 
 ## CI质量门禁
 

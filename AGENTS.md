@@ -43,3 +43,11 @@
 - 样式使用uview-plus组件库，减少自定义样式
 - 接口调用统一使用request封装
 - 敏感信息存储在storage中需要加密处理
+
+## 版本管理（Git Flow）
+- **远程仓库**: https://github.com/htvv0308/safe_food_test
+- **主分支**: main（生产环境代码）
+- **开发分支**: develop（开发主分支）
+- **功能分支**: feature/功能名
+- **修复分支**: hotfix/问题描述
+- **详见**: docs/conventions/git-workflow.md
